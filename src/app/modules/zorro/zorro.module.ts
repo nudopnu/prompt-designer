@@ -4,6 +4,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { CopyOutline } from '@ant-design/icons-angular/icons';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 const icons: IconDefinition[] = [
   CopyOutline,
@@ -18,6 +19,7 @@ const icons: IconDefinition[] = [
     NzInputModule,
     NzButtonModule,
     NzIconModule,
+    NzToolTipModule,
   ]
 })
 export class ZorroModule { }

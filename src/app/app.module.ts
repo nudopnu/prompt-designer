@@ -14,6 +14,7 @@ import { ZorroModule } from './modules/zorro/zorro.module';
 import { HomeComponent } from './routes/home/home.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
+import { TooltipDirective } from './directives/tooltip.directive';
 
 registerLocaleData(en);
 
@@ -22,7 +23,8 @@ registerLocaleData(en);
     AppComponent,
     HomeComponent,
     EditorComponent,
-    PromptPreviewComponent
+    PromptPreviewComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
