@@ -1,6 +1,8 @@
 <div id="prompt">
     <pre style="margin: 0;"><code #codeRef [innerHTML]="innerHtml"></code></pre>
-    <button nz-button nzType="default" (click)="copyPromptToClipboard()">
+    @if (code.length > 0) {
+    <button nz-button nzSize="small" (click)="copyPromptToClipboard()">
         <span nz-icon nzType="copy" nzTheme="outline"></span>
     </button>
+    }
 </div>
