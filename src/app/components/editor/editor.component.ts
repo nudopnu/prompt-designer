@@ -10,7 +10,7 @@ export class EditorComponent {
   
   @ViewChild('editor') editorRef!: ElementRef;
   @Input() editorOptions = { theme: 'vs-dark', language: 'mylang' };
-  @Input() code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  @Input() code: string = 'function x() {\n\tconsole.log("Hello world!");\n}';
   options = {
     theme: 'vs-dark'
   };

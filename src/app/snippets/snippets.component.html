@@ -1,0 +1,8 @@
+<nz-collapse>
+    @for (panel of panels; track panel) {
+    <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+        <!-- <p >{{panel.content}}</p> -->
+        <textarea nz-input [textContent]="panel.content"></textarea>
+    </nz-collapse-panel>
+    }
+</nz-collapse>

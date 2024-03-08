@@ -15,6 +15,7 @@ import { HomeComponent } from './routes/home/home.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
 import { TooltipDirective } from './directives/tooltip.directive';
+import { SnippetsComponent } from './snippets/snippets.component';
 
 registerLocaleData(en);
 
@@ -24,7 +25,8 @@ registerLocaleData(en);
     HomeComponent,
     EditorComponent,
     PromptPreviewComponent,
-    TooltipDirective
+    TooltipDirective,
+    SnippetsComponent
   ],
   imports: [
     BrowserModule,
