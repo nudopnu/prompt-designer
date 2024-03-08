@@ -1,0 +1,10 @@
+<aside>
+    <nz-input-group nzPrefix="&#123;" nzSuffix="&#x7D;">
+        <input type="text" nz-input />
+    </nz-input-group>
+    <textarea nz-input></textarea>
+</aside>
+<main>
+    <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    <pro-prompt-preview [code]="code"> </pro-prompt-preview>
+</main>

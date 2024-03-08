@@ -1,0 +1,21 @@
+:host {
+    display: flex;
+    height: 100%;
+}
+
+aside {
+    flex: 1 0 300px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+    padding: 16px;
+    border-right: 1px solid #333;
+}
+
+aside>* {
+    place-self: baseline;
+}
+
+main {
+    flex: 1 1 50%;
+}

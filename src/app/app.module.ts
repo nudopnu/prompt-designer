@@ -1,30 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { MonacoModule } from './modules/monaco/monaco.module';
+import { ZorroModule } from './modules/zorro/zorro.module';
 import { HomeComponent } from './routes/home/home.component';
+import { EditorComponent } from './components/editor/editor.component';
+import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    EditorComponent,
+    PromptPreviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ZorroModule,
+    MonacoModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
