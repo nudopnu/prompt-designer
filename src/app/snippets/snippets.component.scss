@@ -7,8 +7,17 @@
         font-family: monospace;
         color: #3f95dd !important;
     }
+
+    .ant-collapse-header>div{
+        display: inline-block !important;
+    }
+}
+
+nz-collapse {
+    border-top: none;
 }
 
 textarea {
     border: none;
+    font-family: monospace;
 }

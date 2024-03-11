@@ -1,8 +1,10 @@
-<nz-collapse>
-    @for (panel of panels; track panel) {
-    <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
-        <!-- <p >{{panel.content}}</p> -->
-        <textarea nz-input [ngModel]="panel.content" (ngModelChange)="updateSnippetContent(panel.keyword, $event)"></textarea>
-    </nz-collapse-panel>
-    }
-</nz-collapse>
+<pro-searchable #search [list]="panels" key="keyword">
+    <nz-collapse content>
+        @for (panel of search.filteredList(); track panel) {
+        <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+            <textarea nz-input nzAutosize [ngModel]="panel.content()"
+                (ngModelChange)="updateSnippetContent(panel.keyword, $event)"></textarea>
+        </nz-collapse-panel>
+        }
+    </nz-collapse>
+</pro-searchable>

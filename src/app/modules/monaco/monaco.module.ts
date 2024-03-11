@@ -2,8 +2,8 @@ import { NgModule, signal } from '@angular/core';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 export const snip = signal({
-  "test": "I am a snippet",
-  "abc": "The alphabet",
+  "test": signal("I am a snippet"),
+  "abc": signal("The alphabet"),
 });
 
 export function onMonacoLoad() {

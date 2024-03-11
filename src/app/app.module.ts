@@ -16,6 +16,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
 import { TooltipDirective } from './directives/tooltip.directive';
 import { SnippetsComponent } from './snippets/snippets.component';
+import { SearchableComponent } from './components/searchable/searchable.component';
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
     EditorComponent,
     PromptPreviewComponent,
     TooltipDirective,
-    SnippetsComponent
+    SnippetsComponent,
+    SearchableComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { snip } from '../modules/monaco/monaco.module';
 
 @Component({
@@ -23,9 +23,9 @@ export class SnippetsComponent {
   updateSnippetKeyword(oldKeyword: keyof typeof this.snippets, newKeyword: string) {
     snip.update(oldSnippets => {
       const newSnippets = { ...oldSnippets };
-      const oldValue = oldSnippets[oldKeyword];
+      const oldValue = oldSnippets[oldKeyword]();
       delete newSnippets[oldKeyword];
-      newSnippets[newKeyword as keyof typeof this.snippets] = oldValue;
+      newSnippets[newKeyword as keyof typeof this.snippets] = signal(oldValue);
       return newSnippets;
     });
   }
@@ -33,7 +33,7 @@ export class SnippetsComponent {
   updateSnippetContent(keyword: keyof typeof this.snippets, content: string) {
     snip.update(oldSnippets => {
       const newSnippets = { ...oldSnippets };
-      newSnippets[keyword] = content;
+      newSnippets[keyword].set(content);
       return newSnippets;
     });
   }

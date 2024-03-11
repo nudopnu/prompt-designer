@@ -1,0 +1,12 @@
+<nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" nz-input placeholder="search snippet" [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)" />
+</nz-input-group>
+<ng-content></ng-content>
+
+<ng-template #suffixIconSearch>
+    <span nz-icon nzType="search"></span>
+    @if (searchTerm()) {
+    <span nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" (click)="searchTerm.set('')"></span>
+    }
+</ng-template>

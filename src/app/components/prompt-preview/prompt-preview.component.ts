@@ -22,7 +22,7 @@ export class PromptPreviewComponent {
   private computeInnerHtml() {
     const snippets = snip();
     const innerHtml = this.code()
-      .replace(/\{(\w+)\}/g, (match, key: keyof typeof snippets) => snippets[key] ? this.toSpan(snippets[key]) : match);
+      .replace(/\{(\w+)\}/g, (match, key: keyof typeof snippets) => snippets[key] ? this.toSpan(snippets[key]()) : match);
     return this.domSanatizer.bypassSecurityTrustHtml(innerHtml);
   }
 
