@@ -1,6 +1,6 @@
 <nz-input-group [nzSuffix]="suffixIconSearch">
-    <input type="text" nz-input placeholder="search snippet" [ngModel]="searchTerm()"
-        (ngModelChange)="searchTerm.set($event)" />
+    <input type="text" nz-input proSubmit placeholder="search or create new snippet" [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)" (onSubmit)="onSubmit()" />
 </nz-input-group>
 <ng-content></ng-content>
 

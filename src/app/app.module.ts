@@ -9,14 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EditorComponent } from './components/editor/editor.component';
+import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
+import { SearchableComponent } from './components/searchable/searchable.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { SubmitDirective } from './directives/submit.directive';
+import { TooltipDirective } from './directives/tooltip.directive';
 import { MonacoModule } from './modules/monaco/monaco.module';
 import { ZorroModule } from './modules/zorro/zorro.module';
 import { HomeComponent } from './routes/home/home.component';
-import { EditorComponent } from './components/editor/editor.component';
-import { PromptPreviewComponent } from './components/prompt-preview/prompt-preview.component';
-import { TooltipDirective } from './directives/tooltip.directive';
 import { SnippetsComponent } from './snippets/snippets.component';
-import { SearchableComponent } from './components/searchable/searchable.component';
 
 registerLocaleData(en);
 
@@ -28,7 +30,9 @@ registerLocaleData(en);
     PromptPreviewComponent,
     TooltipDirective,
     SnippetsComponent,
-    SearchableComponent
+    SearchableComponent,
+    SubmitDirective,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,

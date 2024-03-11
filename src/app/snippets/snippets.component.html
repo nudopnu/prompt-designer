@@ -1,10 +1,28 @@
-<pro-searchable #search [list]="panels" key="keyword">
+<pro-searchable #search [list]="panels" key="keyword" (onCreateNew)="onCreateNew($event)">
     <nz-collapse content>
+        @if (creatingNew) {
+        <nz-collapse-panel [nzHeader]="head" nzActive="true">
+            <textarea nz-input nzAutosize [(ngModel)]="newContent"></textarea>
+        </nz-collapse-panel>
+        <ng-template #head>
+            @if (editNewHeader) {
+            <input type="text" nz-input proSubmit proAutofocus placeholder="new snippet" nzSize="small"
+                [(ngModel)]="newKeyword" (onSubmit)="onBlur()" (blur)="onBlur()" />
+            } @else {
+            {{'{' + newKeyword + '}'}}
+            }
+        </ng-template>
+        }
         @for (panel of search.filteredList(); track panel) {
-        <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
+        <nz-collapse-panel [nzHeader]="panel.name" [nzDisabled]="panel.disabled">
             <textarea nz-input nzAutosize [ngModel]="panel.content()"
                 (ngModelChange)="updateSnippetContent(panel.keyword, $event)"></textarea>
         </nz-collapse-panel>
         }
     </nz-collapse>
+    @if (search.filteredList().length === 0 && !creatingNew) {
+    <p>
+        '{{search.searchTerm()}}' not found. Press enter to create a new snippet.
+    </p>
+    }
 </pro-searchable>
