@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { DiffEditorModel } from 'ngx-monaco-editor-v2';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'pro-editor',
@@ -7,21 +6,9 @@ import { DiffEditorModel } from 'ngx-monaco-editor-v2';
   styleUrl: './editor.component.scss'
 })
 export class EditorComponent {
-  
+
   @ViewChild('editor') editorRef!: ElementRef;
   @Input() editorOptions = { theme: 'vs-dark', language: 'mylang' };
-  @Input() code: string = 'function x() {\n\tconsole.log("Hello world!");\n}';
-  options = {
-    theme: 'vs-dark'
-  };
-  originalModel: DiffEditorModel = {
-    code: 'heLLo world!\nMy name is Peter',
-    language: 'text/plain'
-  };
-
-  modifiedModel: DiffEditorModel = {
-    code: 'hello orlando!\nMy name is Peter',
-    language: 'text/plain'
-  };
+  code = 'This is a prompt template.\n\n{test}';
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { snippets } from '../modules/monaco/monaco.module';
+import { snip } from '../modules/monaco/monaco.module';
 
 @Component({
   selector: 'pro-snippets',
@@ -8,29 +8,34 @@ import { snippets } from '../modules/monaco/monaco.module';
 })
 export class SnippetsComponent {
 
-  panels = Object.keys(snippets).map(keyword => ({
-    name: `{${keyword}}`,
-    content: snippets[keyword],
-    active: false,
-    disabled: false
-  }));
-
-  panels2 = [
-    {
-      active: true,
-      name: 'This is panel header 1',
-
-    },
-    {
-
-      disabled: false,
-      name: 'This is panel header 2'
-    },
-    {
+  private snippets = snip();
+  panels = Object.keys(snip()).map(keyword => {
+    const snippets = snip();
+    return {
+      name: `{${keyword}}`,
+      content: snippets[keyword as keyof typeof snippets],
       active: false,
-      disabled: true,
-      name: 'This is panel header 3'
-    }
-  ];
+      disabled: false,
+      keyword: keyword as keyof typeof snippets,
+    };
+  });
+
+  updateSnippetKeyword(oldKeyword: keyof typeof this.snippets, newKeyword: string) {
+    snip.update(oldSnippets => {
+      const newSnippets = { ...oldSnippets };
+      const oldValue = oldSnippets[oldKeyword];
+      delete newSnippets[oldKeyword];
+      newSnippets[newKeyword as keyof typeof this.snippets] = oldValue;
+      return newSnippets;
+    });
+  }
+
+  updateSnippetContent(keyword: keyof typeof this.snippets, content: string) {
+    snip.update(oldSnippets => {
+      const newSnippets = { ...oldSnippets };
+      newSnippets[keyword] = content;
+      return newSnippets;
+    });
+  }
 
 }

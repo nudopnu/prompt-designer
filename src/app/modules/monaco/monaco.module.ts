@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, signal } from '@angular/core';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
-export let snippets = {
-  "test": "I am a test",
+export const snip = signal({
+  "test": "I am a snippet",
   "abc": "The alphabet",
-} as Record<string, string>;
+});
 
 export function onMonacoLoad() {
   const monaco = (window as any).monaco;
@@ -26,6 +26,7 @@ export function onMonacoLoad() {
   function createDependencyProposals(range: any) {
     // returning a static list of proposals, not even looking at the prefix (filtering is done by the Monaco editor),
     // here you could do a server side lookup
+    const snippets = snip();
     return Object.keys(snippets).map(keyword => ({
       label: keyword,
       kind: monaco.languages.CompletionItemKind.Keyword,

@@ -1,5 +1,12 @@
-::ng-deep .ant-collapse-content-box {
-    padding: 0 !important;
+::ng-deep {
+    .ant-collapse-content-box {
+        padding: 0 !important;
+    }
+
+    .ant-collapse-header {
+        font-family: monospace;
+        color: #3f95dd !important;
+    }
 }
 
 textarea {

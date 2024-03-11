@@ -2,7 +2,7 @@
     @for (panel of panels; track panel) {
     <nz-collapse-panel [nzHeader]="panel.name" [nzActive]="panel.active" [nzDisabled]="panel.disabled">
         <!-- <p >{{panel.content}}</p> -->
-        <textarea nz-input [textContent]="panel.content"></textarea>
+        <textarea nz-input [ngModel]="panel.content" (ngModelChange)="updateSnippetContent(panel.keyword, $event)"></textarea>
     </nz-collapse-panel>
     }
 </nz-collapse>
