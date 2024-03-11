@@ -19,6 +19,7 @@ import { MonacoModule } from './modules/monaco/monaco.module';
 import { ZorroModule } from './modules/zorro/zorro.module';
 import { HomeComponent } from './routes/home/home.component';
 import { SnippetsComponent } from './snippets/snippets.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 registerLocaleData(en);
 
@@ -32,7 +33,8 @@ registerLocaleData(en);
     SnippetsComponent,
     SearchableComponent,
     SubmitDirective,
-    AutofocusDirective
+    AutofocusDirective,
+    TabsComponent
   ],
   imports: [
     BrowserModule,

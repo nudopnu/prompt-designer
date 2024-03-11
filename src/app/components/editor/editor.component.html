@@ -2,6 +2,8 @@
     <pro-snippets></pro-snippets>
 </aside>
 <main>
-    <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    <pro-tabs [isLoading]="isLoading"></pro-tabs>
+    <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [(ngModel)]="code"
+        (onInit)="onInit()"></ngx-monaco-editor>
     <pro-prompt-preview [code]="code"> </pro-prompt-preview>
 </main>

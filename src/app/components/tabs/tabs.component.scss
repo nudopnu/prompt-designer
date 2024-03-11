@@ -1,0 +1,25 @@
+::ng-deep {
+
+    .ant-tabs-tab-active,
+    .ant-tabs-top {
+        background-color: #1e1e1e !important;
+        border-bottom-color: #1e1e1e !important;
+    }
+
+    .ant-tabs-tab-active {
+        border-top: 1px solid !important;
+    }
+
+    .ant-tabs-nav-wrap {
+        background-color: #181818 !important;
+    }
+
+    .ant-tabs-tab-btn {
+        cursor: pointer !important;
+    }
+
+    .ant-tabs-nav-add {
+        border: none !important;
+        background-color: #181818 !important;
+    }
+}
