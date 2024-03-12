@@ -1,4 +1,5 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { PromptsService } from '../../services/prompts.service';
 
 @Component({
   selector: 'pro-tabs',
@@ -8,15 +9,20 @@ import { Component, Input, input } from '@angular/core';
 export class TabsComponent {
 
   @Input() isLoading = true;
-  tabs = ['prompt_01', 'prompt_02'];
-  selectedIndex = 0;
+  selectedIndex = this.promptsService.selectedTabIndex;
+  prompts = this.promptsService.prompts;
 
-  closeTab({ index }: { index: number }): void {
-    this.tabs.splice(index, 1);
+  constructor(public promptsService: PromptsService) { }
+
+  onClose({ index }: { index: number }): void {
+    this.promptsService.closeTabByIndex(index);
   }
 
-  newTab(): void {
-    this.tabs.push(`prompt_0${this.tabs.length + 1}`);
-    this.selectedIndex = this.tabs.length;
+  onAdd(): void {
+    this.promptsService.addNewPrompt();
+  }
+
+  onSelectedIndexChange(index: number) {
+    this.promptsService.selectTabByIndex(index)
   }
 }

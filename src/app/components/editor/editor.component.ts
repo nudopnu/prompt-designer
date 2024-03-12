@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, computed, signal } from '@angular/core';
+import { PromptsService } from '../../services/prompts.service';
 
 @Component({
   selector: 'pro-editor',
@@ -9,10 +10,9 @@ export class EditorComponent {
 
   @ViewChild('editor') editorRef!: ElementRef;
   @Input() editorOptions = { theme: 'vs-dark', language: 'mylang' };
-  code = 'This is a prompt template.\n\n{test}';
   isLoading = true;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, public promptsService: PromptsService) { }
 
   onInit() {
     this.isLoading = false;

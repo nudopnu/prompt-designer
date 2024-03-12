@@ -3,7 +3,7 @@
 </aside>
 <main>
     <pro-tabs [isLoading]="isLoading"></pro-tabs>
-    <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [(ngModel)]="code"
-        (onInit)="onInit()"></ngx-monaco-editor>
-    <pro-prompt-preview [code]="code"> </pro-prompt-preview>
+    <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [ngModel]="promptsService.currentTemplateContent()"
+        (ngModelChange)="promptsService.setCurrentTemplateContent($event)" (onInit)="onInit()"></ngx-monaco-editor>
+    <pro-prompt-preview [code]="promptsService.currentTemplateContent()"> </pro-prompt-preview>
 </main>
