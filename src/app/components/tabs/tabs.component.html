@@ -1,10 +1,15 @@
 <nz-tabset [nzSelectedIndex]="selectedIndex()" nzType="editable-card" (nzAdd)="onAdd()" (nzClose)="onClose($event)"
     nzSize="small" [nzAnimated]="false" (nzSelectedIndexChange)="onSelectedIndexChange($event)">
-    <nz-tab *ngFor="let prompt of prompts()" nzClosable [nzTitle]="prompt.name">
+    @for (prompt of prompts(); track $index) {
+    <nz-tab nzClosable [nzTitle]="title">
         @if (isLoading) {
         <p style="padding-left: 14px;">Loading...</p>
         } @else {
         <p style="padding-left: 14px;">prompt > {{ prompt.name }}</p>
         }
     </nz-tab>
+    <ng-template #title>
+        <span proMouseEvents (middleMouseClick)="onMiddleMouseClick($index)">{{prompt.name}}</span>
+    </ng-template>
+    }
 </nz-tabset>

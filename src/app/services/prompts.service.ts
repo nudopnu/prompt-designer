@@ -1,6 +1,6 @@
 import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 
-interface PromptTemplate {
+export interface PromptTemplate {
   content: string;
   name: string;
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PromptsService } from '../../services/prompts.service';
+import { PromptTemplate, PromptsService } from '../../services/prompts.service';
 
 @Component({
   selector: 'pro-tabs',
@@ -8,11 +8,16 @@ import { PromptsService } from '../../services/prompts.service';
 })
 export class TabsComponent {
 
+
   @Input() isLoading = true;
   selectedIndex = this.promptsService.selectedTabIndex;
   prompts = this.promptsService.prompts;
 
   constructor(public promptsService: PromptsService) { }
+
+  onMiddleMouseClick(index: number) {
+    this.promptsService.closeTabByIndex(index);
+  }
 
   onClose({ index }: { index: number }): void {
     this.promptsService.closeTabByIndex(index);
