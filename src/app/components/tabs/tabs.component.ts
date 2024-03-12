@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PromptTemplate, PromptsService } from '../../services/prompts.service';
+import { PromptsService } from '../../services/prompts.service';
 
 @Component({
   selector: 'pro-tabs',
@@ -7,7 +7,6 @@ import { PromptTemplate, PromptsService } from '../../services/prompts.service';
   styleUrl: './tabs.component.scss'
 })
 export class TabsComponent {
-
 
   @Input() isLoading = true;
   selectedIndex = this.promptsService.selectedTabIndex;
