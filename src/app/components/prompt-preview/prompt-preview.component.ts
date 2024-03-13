@@ -19,6 +19,12 @@ export class PromptPreviewComponent {
     navigator.clipboard.writeText(this.codeRef.nativeElement.innerText);
   }
 
+  computeMessage() {
+    const snippets = snip();
+    return this.code()
+      .replace(/\{(\w+)\}/g, (match, key: keyof typeof snippets) => snippets[key] ? snippets[key]() : match);
+  }
+
   private computeInnerHtml() {
     const snippets = snip();
     const innerHtml = this.code()

@@ -21,6 +21,8 @@ import { HomeComponent } from './routes/home/home.component';
 import { SnippetsComponent } from './snippets/snippets.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { MouseEventsDirective } from './directives/mouse-events.directive';
+import { ConversationComponent } from './components/conversation/conversation.component';
+import { MessageComponent } from './components/message/message.component';
 
 registerLocaleData(en);
 
@@ -36,7 +38,9 @@ registerLocaleData(en);
     SubmitDirective,
     AutofocusDirective,
     TabsComponent,
-    MouseEventsDirective
+    MouseEventsDirective,
+    ConversationComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ZorroModule,
     MonacoModule,
+    HttpClientModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

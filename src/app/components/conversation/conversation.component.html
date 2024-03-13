@@ -1,0 +1,35 @@
+@if (currentConversation().length == 0 ) {
+<ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+<section id="options">
+    @if (!isLoading()) {
+    <button nz-button [disabled]="!model()" (click)="onClickStartNewConversation()">Start new conversation</button>
+    <button nz-button nzShape="circle">
+        <span nz-icon nzType="setting"></span>
+    </button>
+    } @else {
+    <span nz-icon [nzType]="'loading'"></span>
+    }
+</section>
+} @else {
+<div id="messages">
+    @for (message of currentConversation(); track $index) {
+    <pro-message [message]="message"></pro-message>
+    }
+    @if (!isLoading()) {
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    }
+    <section id="options">
+        @if (!isLoading()) {
+        <button nz-button (click)="onClickSendNextMessage()">Append Message</button>
+        } @else {
+        <span nz-icon [nzType]="'loading'"></span>
+        }
+    </section>
+</div>
+<button id="export-button" nz-button nz-tooltip nzTooltipTitle="Download conversation as JSON" nzTooltipPlacement="left"
+    nzType="primary" nzShape="circle" (click)="onClickDownloadConversation()">
+    <span nz-icon nzType="download"></span>
+</button>
+}
+
+<ng-template #contentTpl><ng-content select="pro-prompt-preview"></ng-content></ng-template>

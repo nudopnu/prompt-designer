@@ -1,5 +1,5 @@
 <div id="prompt">
-    <pre style="margin: 0;"><code #codeRef [innerHTML]="innerHtml()"></code></pre>
+    <pre style="margin: 0; text-wrap: balance;"><code #codeRef [innerHTML]="innerHtml()"></code></pre>
     @if (code().length > 0) {
     <button nz-button proTooltip nzTooltipTitle="Prompt copied!" nzTooltipTrigger="click" nzSize="small"
         (click)="copyPromptToClipboard()">

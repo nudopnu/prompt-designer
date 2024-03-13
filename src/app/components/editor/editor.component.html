@@ -5,5 +5,7 @@
     <pro-tabs [isLoading]="isLoading"></pro-tabs>
     <ngx-monaco-editor style="height: 30%" [options]="editorOptions" [ngModel]="promptsService.currentTemplateContent()"
         (ngModelChange)="promptsService.setCurrentTemplateContent($event)" (onInit)="onInit()"></ngx-monaco-editor>
-    <pro-prompt-preview [code]="promptsService.currentTemplateContent()"> </pro-prompt-preview>
+    <pro-conversation>
+        <pro-prompt-preview [code]="promptsService.currentTemplateContent()"> </pro-prompt-preview>
+    </pro-conversation>
 </main>
