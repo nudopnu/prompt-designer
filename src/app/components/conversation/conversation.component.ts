@@ -13,6 +13,7 @@ export class ConversationComponent {
   currentConversation: Signal<string[]>;
   isLoading: WritableSignal<boolean>;
   shouldAddTemplate = false;
+  settingsVisible = false;
 
   constructor(
     private conversationsService: ConversationsService,
@@ -32,6 +33,8 @@ export class ConversationComponent {
   onClickStartNewConversation() {
     const message = this.preview.computeMessage();
     this.conversationsService.startNewChat(message);
+    this.shouldAddTemplate = false;
+    this.settingsVisible = false;
   }
 
   onClickSendNextMessage() {

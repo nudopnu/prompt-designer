@@ -1,12 +1,14 @@
 @if (currentConversation().length == 0 ) {
 <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
 <section id="settings">
-    <pro-model-settings></pro-model-settings>
+    <pro-hidable [hidden]="!settingsVisible">
+        <pro-model-settings></pro-model-settings>
+    </pro-hidable>
 </section>
 <section id="options">
     @if (!isLoading()) {
     <button nz-button (click)="onClickStartNewConversation()">Start new conversation</button>
-    <button nz-button nzShape="circle">
+    <button nz-button nzShape="circle" (click)="settingsVisible = !settingsVisible">
         <span nz-icon nzType="setting"></span>
     </button>
     } @else {

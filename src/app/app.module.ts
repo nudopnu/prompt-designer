@@ -24,6 +24,7 @@ import { MouseEventsDirective } from './directives/mouse-events.directive';
 import { ConversationComponent } from './components/conversation/conversation.component';
 import { MessageComponent } from './components/message/message.component';
 import { ModelSettingsComponent } from './components/model-settings/model-settings.component';
+import { HidableComponent } from './components/hidable/hidable.component';
 
 registerLocaleData(en);
 
@@ -42,7 +43,8 @@ registerLocaleData(en);
     MouseEventsDirective,
     ConversationComponent,
     MessageComponent,
-    ModelSettingsComponent
+    ModelSettingsComponent,
+    HidableComponent
   ],
   imports: [
     BrowserModule,
