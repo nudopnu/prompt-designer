@@ -3,7 +3,15 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 export const snip = signal({
   "test": signal("I am a snippet"),
-  "abc": signal("The alphabet"),
+  "code": signal(`public static int simpleLoop01(int a)
+  {
+    int sum = 0;
+    for (int i = 0; i < a; i++)
+    {
+        sum += i;
+    }
+    return sum;
+  }`),
 });
 
 export function onMonacoLoad() {

@@ -13,6 +13,7 @@ export class ConversationComponent {
   model: Signal<string>;
   currentConversation: Signal<string[]>;
   isLoading: WritableSignal<boolean>;
+  shouldAddTemplate = false;
 
   constructor(
     private conversationsService: ConversationsService,
@@ -34,10 +35,15 @@ export class ConversationComponent {
     const message = this.preview.computeMessage();
     this.conversationsService.startNewChat({ model: this.model(), temperature: 1 }, message);
   }
-  
+
   onClickSendNextMessage() {
     const message = this.preview.computeMessage();
     this.conversationsService.addMessage(message);
+    this.shouldAddTemplate = false;
+  }
+
+  onClickClear() {
+    this.conversationsService.clearCurrentChat();
   }
 
 }

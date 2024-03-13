@@ -15,12 +15,17 @@
     @for (message of currentConversation(); track $index) {
     <pro-message [message]="message"></pro-message>
     }
-    @if (!isLoading()) {
+    @if (!isLoading() && shouldAddTemplate) {
     <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
     }
     <section id="options">
         @if (!isLoading()) {
-        <button nz-button (click)="onClickSendNextMessage()">Append Message</button>
+        @if (shouldAddTemplate) {
+        <button nz-button (click)="onClickSendNextMessage()">Send Message</button>
+        } @else {
+        <button nz-button (click)="shouldAddTemplate = true">Append Template</button>
+        <button nz-button (click)="onClickClear()">Clear</button>
+        }
         } @else {
         <span nz-icon [nzType]="'loading'"></span>
         }

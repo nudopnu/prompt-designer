@@ -12,12 +12,16 @@ export class PromptsService {
 
   MOCK: PromptTemplate[] = [
     { content: 'This is a prompt template\n\n{test}', name: 'prompt_01' },
-    { content: 'This is another template {abc}', name: 'prompt_02' },
+    { content: 'You will be provided a C# function of a .NET Framwork codebase. Generate unit tests using NUnit and optionally Nsubstitute, aiming for full code coverage.\n\n```\npublic class SampleClass\n{\n  {code}\n}\n```', name: 'prompt_02' },
   ]
 
   prompts = signal<PromptTemplate[]>(this.MOCK);
   selectedTabIndex = signal(0);
   currentTemplateContent = signal("");
+
+  constructor() {
+    this.selectTabByIndex(0);
+  }
 
   selectTabByIndex(index: number) {
     this.selectedTabIndex.set(index);

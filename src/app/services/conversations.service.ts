@@ -20,6 +20,11 @@ export class ConversationsService {
     this.isLoading = signal(false);
   }
 
+  clearCurrentChat() {
+    this.currentConversation.set([]);
+    this.currentChat = undefined;
+  }
+
   startNewChat(modelParams: ModelParams, message: string) {
     this.isLoading.set(true);
     this.currentConversation.update(chat => ([...chat, message]));
