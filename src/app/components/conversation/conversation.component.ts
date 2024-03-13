@@ -10,7 +10,6 @@ import { PromptPreviewComponent } from '../prompt-preview/prompt-preview.compone
 export class ConversationComponent {
 
   @ContentChild(PromptPreviewComponent) preview!: PromptPreviewComponent;
-  model: Signal<string>;
   currentConversation: Signal<string[]>;
   isLoading: WritableSignal<boolean>;
   shouldAddTemplate = false;
@@ -18,7 +17,6 @@ export class ConversationComponent {
   constructor(
     private conversationsService: ConversationsService,
   ) {
-    this.model = computed(() => this.conversationsService.models()[0]);
     this.currentConversation = this.conversationsService.currentConversation;
     this.isLoading = conversationsService.isLoading;
   }
@@ -33,7 +31,7 @@ export class ConversationComponent {
 
   onClickStartNewConversation() {
     const message = this.preview.computeMessage();
-    this.conversationsService.startNewChat({ model: this.model(), temperature: 1 }, message);
+    this.conversationsService.startNewChat(message);
   }
 
   onClickSendNextMessage() {

@@ -1,8 +1,11 @@
 @if (currentConversation().length == 0 ) {
 <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+<section id="settings">
+    <pro-model-settings></pro-model-settings>
+</section>
 <section id="options">
     @if (!isLoading()) {
-    <button nz-button [disabled]="!model()" (click)="onClickStartNewConversation()">Start new conversation</button>
+    <button nz-button (click)="onClickStartNewConversation()">Start new conversation</button>
     <button nz-button nzShape="circle">
         <span nz-icon nzType="setting"></span>
     </button>

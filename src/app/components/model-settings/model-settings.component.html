@@ -1,0 +1,15 @@
+<span>Host:</span>
+<span style="display: flex; align-items: center; gap: 10px;">
+    <input nz-input placeholder="Basic usage" [(ngModel)]="host" />
+    <a nz-button [nzSize]="'small'" nzType="link" (click)="onClickSyncHost()">
+        <span nz-icon nzType="sync" nzTheme="outline" [nzSpin]="isLoading"></span>
+    </a>
+</span>
+<span>Model:</span>
+<nz-select [ngModel]="selectedModel()" (ngModelChange)="onChangeModel($event)" [nzDisabled]="isLoading">
+    @for (model of models(); track $index) {
+    <nz-option [nzLabel]="model" [nzValue]="model"></nz-option>
+    }
+</nz-select>
+<span>Temperature:</span>
+<nz-slider [(ngModel)]="temperature" [nzDisabled]="isLoading" nzMin="0" nzMax="1" nzStep="0.05"></nz-slider>

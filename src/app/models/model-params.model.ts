@@ -1,4 +1,4 @@
 export interface ModelParams {
-    model: string;
+    model?: string;
     temperature: number;
 }

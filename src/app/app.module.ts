@@ -23,6 +23,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { MouseEventsDirective } from './directives/mouse-events.directive';
 import { ConversationComponent } from './components/conversation/conversation.component';
 import { MessageComponent } from './components/message/message.component';
+import { ModelSettingsComponent } from './components/model-settings/model-settings.component';
 
 registerLocaleData(en);
 
@@ -40,7 +41,8 @@ registerLocaleData(en);
     TabsComponent,
     MouseEventsDirective,
     ConversationComponent,
-    MessageComponent
+    MessageComponent,
+    ModelSettingsComponent
   ],
   imports: [
     BrowserModule,
