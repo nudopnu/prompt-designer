@@ -1,7 +1,7 @@
 import { Component, Signal, WritableSignal, computed } from '@angular/core';
-import { ApiService } from '../../services/api.service';
-import { ConversationComponent } from '../conversation/conversation.component';
-import { ConversationsService } from '../../services/conversations.service';
+import { ApiService } from '../../../services/api.service';
+import { ConversationComponent } from '../conversation.component';
+import { ConversationsService } from '../../../services/conversations.service';
 
 @Component({
   selector: 'pro-model-settings',

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { snip } from '../modules/monaco/monaco.module';
+import { snip } from '../../modules/monaco/monaco.module';
 
 @Component({
   selector: 'pro-snippets',

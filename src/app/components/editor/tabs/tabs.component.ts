@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PromptsService } from '../../services/prompts.service';
+import { PromptsService } from '../../../services/prompts.service';
 
 @Component({
   selector: 'pro-tabs',
