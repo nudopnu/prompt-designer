@@ -14,6 +14,7 @@ export class ConversationComponent {
   isLoading: WritableSignal<boolean>;
   shouldAddTemplate = false;
   settingsVisible = false;
+  collectionNameSettingVisible = false;
 
   constructor(
     private conversationsService: ConversationsService,
@@ -35,6 +36,7 @@ export class ConversationComponent {
     this.conversationsService.startNewChat(message);
     this.shouldAddTemplate = false;
     this.settingsVisible = false;
+    this.collectionNameSettingVisible = false;
   }
 
   onClickSendNextMessage() {
@@ -45,6 +47,10 @@ export class ConversationComponent {
 
   onClickClear() {
     this.conversationsService.clearCurrentChat();
+  }
+
+  onClickUpdateCollection() {
+    
   }
 
 }

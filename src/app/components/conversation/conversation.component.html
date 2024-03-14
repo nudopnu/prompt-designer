@@ -23,6 +23,11 @@
     @if (!isLoading() && shouldAddTemplate) {
     <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
     }
+    <section id="settings">
+        <pro-hidable [hidden]="!collectionNameSettingVisible">
+            <pro-collection-name-setting></pro-collection-name-setting>
+        </pro-hidable>
+    </section>
     <section id="options">
         @if (!isLoading()) {
         @if (shouldAddTemplate) {
@@ -31,6 +36,7 @@
         <button nz-button (click)="shouldAddTemplate = true">Append Template</button>
         <button nz-button (click)="onClickClear()">Clear</button>
         }
+        <button nz-button (click)="collectionNameSettingVisible = !collectionNameSettingVisible">Set Collection</button>
         } @else {
         <span nz-icon [nzType]="'loading'"></span>
         }

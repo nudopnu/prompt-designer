@@ -25,6 +25,7 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { MessageComponent } from './components/conversation/message/message.component';
 import { ModelSettingsComponent } from './components/conversation/model-settings/model-settings.component';
 import { HidableComponent } from './components/utils/hidable/hidable.component';
+import { CollectionNameSettingComponent } from './components/collection-name-setting/collection-name-setting.component';
 
 registerLocaleData(en);
 
@@ -44,7 +45,8 @@ registerLocaleData(en);
     ConversationComponent,
     MessageComponent,
     ModelSettingsComponent,
-    HidableComponent
+    HidableComponent,
+    CollectionNameSettingComponent
   ],
   imports: [
     BrowserModule,

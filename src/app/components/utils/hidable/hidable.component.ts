@@ -32,7 +32,7 @@ export class HidableComponent implements OnChanges {
     const element = this.elementRef.nativeElement as HTMLElement;
     if (this.hidden && element.style.maxHeight === '') {
       const { height } = element.getBoundingClientRect();
-      element.style.maxHeight = `${height}px`;
+      element.style.maxHeight = `${height + 10}px`;
     }
     setTimeout(() => this._isHidden = this.hidden);
   }

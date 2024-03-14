@@ -1,0 +1,7 @@
+<span>Collection name:</span>
+<span style="display: flex; align-items: center; gap: 10px;">
+    <input nz-input placeholder="Basic usage" [(ngModel)]="collectionName" />
+    <a nz-button [nzSize]="'small'" nzType="link" (click)="onClickSyncHost()">
+        <span nz-icon nzType="sync" nzTheme="outline" [nzSpin]="isLoading"></span>
+    </a>
+</span>

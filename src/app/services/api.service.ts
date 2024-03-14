@@ -5,6 +5,7 @@ import { ModelParams } from '../models/model-params.model';
 import { first } from 'rxjs';
 import { Message } from '../models/messsage.model';
 import { MessageTurn } from '../models/message-turn.model';
+import { CollectionNameUpdateRequest } from '../models/collection-name-update-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class ApiService {
 
   addChatMessage(id: string, message: Message) {
     return this.http.post<MessageTurn[]>(`${this.BASE_URL}/chats/${id}/messages`, message).pipe(first());
+  }
+
+  updateChatCollection(id: string, request: CollectionNameUpdateRequest) {
+    return this.http.patch<CollectionNameUpdateRequest>(`${this.BASE_URL}/chats/${id}/collection`, request).pipe(first());
   }
 
 }

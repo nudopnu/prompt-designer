@@ -1,7 +1,9 @@
-import { Injectable, WritableSignal, model, signal } from '@angular/core';
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { tap } from 'rxjs';
 import { Chat } from '../models/chat.model';
 import { ModelParams } from '../models/model-params.model';
 import { ApiService } from './api.service';
+import { CollectionNameUpdateRequest } from '../models/collection-name-update-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ export class ConversationsService {
 
   models: WritableSignal<string[]>;
   currentConversation: WritableSignal<string[]>;
+  currentCollection: WritableSignal<string>;
   isLoading: WritableSignal<boolean>;
   modelParams: WritableSignal<ModelParams>;
   private currentChat: Chat | undefined;
@@ -17,6 +20,7 @@ export class ConversationsService {
   constructor(private apiService: ApiService) {
     this.models = signal<string[]>([]);
     this.currentConversation = signal<string[]>([]);
+    this.currentCollection = signal<string>('default');
     this.isLoading = signal(false);
     this.apiService.getModels()
       .subscribe(models => {
@@ -57,5 +61,15 @@ export class ConversationsService {
         this.currentConversation.set(messages);
         console.log(messageTurns);
       });
+  }
+
+  setCollection(collectionName: string) {
+    if (!this.currentChat) throw new Error('current chat is undefined');
+    return this.apiService.updateChatCollection(this.currentChat.uuid, { name: collectionName }).pipe(
+      tap(collection => {
+        this.currentCollection.set(collection.name);
+        this.currentChat!.collection = collection.name;
+      })
+    );
   }
 }
