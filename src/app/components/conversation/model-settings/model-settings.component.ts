@@ -1,15 +1,9 @@
-import { Component, OnDestroy, Signal, WritableSignal, computed, model } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Component, OnDestroy, Signal, computed, model } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { connectOnChange } from '../../../lib/utils';
 import { ApiService } from '../../../services/api.service';
 import { ConversationsService } from '../../../services/conversations.service';
-import { Subscription } from 'rxjs';
 
-function connectOnChange<T, U>(sourceSignal: Signal<T>, destinationSignal: WritableSignal<U>, update: (src: T, dst: U) => U) {
-  return toObservable(sourceSignal)
-    .subscribe(sourceValue => {
-      destinationSignal.update(destinationValue => update(sourceValue, destinationValue));
-    });
-}
 
 @Component({
   selector: 'pro-model-settings',
