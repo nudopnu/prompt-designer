@@ -1,0 +1,10 @@
+:host {
+    display: block;
+}
+
+#hover-content {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-15%, -50%);
+}

@@ -1,9 +1,9 @@
-import { Component, OnDestroy, Signal, computed, model } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { connectOnChange } from '../../../lib/utils';
-import { ApiService } from '../../../services/api.service';
+import { Component, OnDestroy, computed, effect, model, signal } from '@angular/core';
+import { Subscription, combineLatest } from 'rxjs';
 import { ConversationsService } from '../../../services/conversations.service';
-
+import { connectOnChange } from '../../../lib/utils';
+import { toObservable } from "@angular/core/rxjs-interop";
+import { TemplateLiteralElement } from '@angular/compiler';
 
 @Component({
   selector: 'pro-model-settings',
@@ -12,38 +12,98 @@ import { ConversationsService } from '../../../services/conversations.service';
 })
 export class ModelSettingsComponent implements OnDestroy {
 
-  host = "http://localhost:8000"
-  temperature = model(1);
-  models: Signal<string[]>;
-  selectedModel: Signal<string>;
-  isLoading = false;
-  subscription: Subscription;
+  private _isLoading = signal(true);
+  isLoading = computed(() => this._isLoading() && this.conversationsService.isLoading());
 
-  constructor(
-    private apiService: ApiService,
-    private conversationsServive: ConversationsService
-  ) {
-    this.models = conversationsServive.models;
-    this.selectedModel = computed(() => conversationsServive.modelParams().model!);
-    this.temperature.set(conversationsServive.modelParams().temperature);
-    this.subscription = connectOnChange(this.temperature, conversationsServive.modelParams, (src, dst) => ({ ...dst, temperature: src }));
+  host = this.conversationsService.host;
+  temperature = model<number>();
+  chatName = model<string>();
+  collectionName = model<string>();
+  model = model<string>();
+
+  models = this.conversationsService.models;
+
+  private subscriptions: Subscription[] = [];
+
+  constructor(private conversationsService: ConversationsService) {
+    this.subscriptions = [
+      connectOnChange(conversationsService.currentChatSettings, this.model, (src, dst) => {
+        if (!src) return dst;
+        return src.model_params.model;
+      }),
+      connectOnChange(conversationsService.currentChatSettings, this.temperature, (src, dst) => {
+        if (!src) return dst;
+        return src.model_params.temperature;
+      }),
+      connectOnChange(conversationsService.currentChatSettings, this.collectionName, (src, dst) => {
+        if (!src) return dst;
+        return src.collection_name;
+      }),
+      connectOnChange(conversationsService.currentChatSettings, this.chatName, (src, dst) => {
+        if (!src) return dst;
+        return src.name;
+      }),
+
+      toObservable(this.model)
+        .subscribe(model => conversationsService
+          .updateChatSettings((settings) => {
+            if (!settings) return settings;
+            return {
+              ...settings,
+              model_params: {
+                ...settings.model_params,
+                model,
+              }
+            }
+          })
+        ),
+
+      toObservable(this.temperature)
+        .subscribe(temperature => conversationsService
+          .updateChatSettings(settings => {
+            if (!settings || !temperature) return settings;
+            return {
+              ...settings,
+              model_params: {
+                ...settings.model_params,
+                temperature,
+              }
+            }
+          })
+        ),
+
+      toObservable(this.chatName)
+        .subscribe(name => conversationsService
+          .updateChatSettings(settings => {
+            if (!settings || !name) return settings;
+            return {
+              ...settings,
+              name,
+            }
+          })
+        ),
+
+      toObservable(this.collectionName)
+        .subscribe(collection_name => conversationsService
+          .updateChatSettings(settings => {
+            if (!settings || !collection_name) return settings;
+            return {
+              ...settings,
+              collection_name,
+            }
+          })
+        ),
+
+    ];
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   onClickSyncHost() {
-    this.isLoading = true;
-    this.apiService.getModels()
-      .subscribe(models => {
-        this.conversationsServive.models.set(models);
-        this.isLoading = false;
-      });
+    this.conversationsService.fetchModels();
+    this.conversationsService.fetchChats();
   }
 
-  onChangeModel(model: string) {
-    this.conversationsServive.modelParams
-      .update(params => ({ ...params, model }));
-  }
 }

@@ -25,7 +25,8 @@ import { ConversationComponent } from './components/conversation/conversation.co
 import { MessageComponent } from './components/conversation/message/message.component';
 import { ModelSettingsComponent } from './components/conversation/model-settings/model-settings.component';
 import { HidableComponent } from './components/utils/hidable/hidable.component';
-import { CollectionNameSettingComponent } from './components/collection-name-setting/collection-name-setting.component';
+import { EditableLabelComponent } from './components/editable-label/editable-label.component';
+import { HoverableComponent } from './components/utils/hoverable/hoverable.component';
 
 registerLocaleData(en);
 
@@ -46,7 +47,8 @@ registerLocaleData(en);
     MessageComponent,
     ModelSettingsComponent,
     HidableComponent,
-    CollectionNameSettingComponent
+    EditableLabelComponent,
+    HoverableComponent
   ],
   imports: [
     BrowserModule,

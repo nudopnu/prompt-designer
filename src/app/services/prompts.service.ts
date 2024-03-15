@@ -1,4 +1,5 @@
-import { Injectable, WritableSignal, computed, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { nextNumbered  } from '../lib/utils';
 
 export interface PromptTemplate {
   content: string;
@@ -49,19 +50,8 @@ export class PromptsService {
   }
 
   private newUntitledName() {
-    const givenNumbers = this.prompts()
-      .map(prompt => prompt.name)
-      .filter(name => name.match(/prompt_[0-9]+/))
-      .map(name => Number(name.split('_')[1]))
-      .sort();
-    let newNumber = givenNumbers.length + 1;
-    for (let i = 0; i < givenNumbers.length; i++) {
-      const givenNumber = givenNumbers[i];
-      if (i + 1 !== givenNumber) {
-        newNumber = i + 1;
-        break;
-      }
-    }
-    return `prompt_${String(newNumber).padStart(2, '0')}`;
+    const promptNames = this.prompts()
+      .map(prompt => prompt.name);
+    return nextNumbered(promptNames, 'prompt');
   }
 }

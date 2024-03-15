@@ -1,8 +1,8 @@
 import { ChatCompletion } from "./chat-completion.model";
-import { Message } from "./messsage.model";
+import { UserMessage, MessageResponse } from "./messsage.model";
 
 export interface MessageTurn {
-    question: Message;
-    answer: Message;
+    question: UserMessage;
+    answer: MessageResponse;
     completion: ChatCompletion;
 }

@@ -1,43 +1,50 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Chat } from '../models/chat.model';
-import { ModelParams } from '../models/model-params.model';
+import { Injectable, signal } from '@angular/core';
 import { first } from 'rxjs';
-import { Message } from '../models/messsage.model';
+import { Chat, ChatCreateRequest, ChatResponse, ChatUpdateRequest } from '../models/chat.model';
 import { MessageTurn } from '../models/message-turn.model';
-import { CollectionNameUpdateRequest } from '../models/collection-name-update-request.model';
+import { ModelParams } from '../models/model-params.model';
+import { UserMessage } from '../models/messsage.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  BASE_URL = 'http://localhost:8000'
+  baseUrl = signal('http://localhost:8000');
 
   constructor(private http: HttpClient) { }
 
-  getModels() {
-    return this.http.get<string[]>(`${this.BASE_URL}/models`).pipe(first());
+  listChats() {
+    return this.http.get<ChatResponse[]>(`${this.baseUrl()}/chats`).pipe(first());
   }
 
-  listChats() {
-    return this.http.get<Chat[]>(`${this.BASE_URL}/chats`).pipe(first());
+  createChat(createRequest: ChatCreateRequest) {
+    return this.http.post<ChatResponse>(`${this.baseUrl()}/chats`, createRequest).pipe(first());
   }
 
   getChat(id: string) {
-    return this.http.get<Chat>(`${this.BASE_URL}/chats/${id}`).pipe(first());
+    return this.http.get<ChatResponse>(`${this.baseUrl()}/chats/${id}`).pipe(first());
   }
 
-  createChat(modelParams: ModelParams) {
-    return this.http.post<Chat>(`${this.BASE_URL}/chats`, modelParams).pipe(first());
+  updateChat(id: string, updateRequest: ChatUpdateRequest) {
+    return this.http.patch<ChatResponse>(`${this.baseUrl()}/chats/${id}`, updateRequest).pipe(first());
   }
 
-  addChatMessage(id: string, message: Message) {
-    return this.http.post<MessageTurn[]>(`${this.BASE_URL}/chats/${id}/messages`, message).pipe(first());
+  deleteChat(id: string) {
+    return this.http.delete<ChatResponse>(`${this.baseUrl()}/chats/${id}`).pipe(first());
   }
 
-  updateChatCollection(id: string, request: CollectionNameUpdateRequest) {
-    return this.http.patch<CollectionNameUpdateRequest>(`${this.BASE_URL}/chats/${id}/collection`, request).pipe(first());
+  listChatMessages(id: string) {
+    return this.http.get<MessageTurn[]>(`${this.baseUrl()}/chats/${id}`).pipe(first());
+  }
+
+  createChatMessage(chatId: string, message: UserMessage) {
+    return this.http.post<MessageTurn[]>(`${this.baseUrl()}/chats/${chatId}/messages`, message).pipe(first());
+  }
+
+  listAvailableModels() {
+    return this.http.get<string[]>(`${this.baseUrl()}/models`).pipe(first());
   }
 
 }

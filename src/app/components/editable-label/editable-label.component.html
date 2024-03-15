@@ -1,0 +1,25 @@
+<pro-hoverable [(isHovered)]="isHovered">
+    @if (isEdited) {
+    <nz-input-group [nzSuffix]="placeholder">
+        <input nz-input [(ngModel)]="editableLabel" proAutofocus proSubmit style="display: inline;" (blur)="onSubmit()"
+            (onSubmit)="onSubmit()" spellcheck="false">
+    </nz-input-group>
+    } @else {
+    <nz-input-group [nzSuffix]="placeholder" style="background-color: transparent; cursor: pointer;">
+        <input nz-input [(ngModel)]="model" [disabled]="true"
+            style="cursor: pointer; background-color: transparent; display: inline; border-color: transparent; pointer-events: none;">
+    </nz-input-group>
+    }
+    <div id="hover-content">
+        <button nz-button nzSize="small" nzType="link"
+            style="background: linear-gradient(90deg, #0000 0%, #181818 50%);">
+            <span nz-icon [nzType]="isEdited ? 'send': 'edit'"></span>
+        </button>
+    </div>
+</pro-hoverable>
+
+<ng-template #placeholder>
+    @if (isHovered || isEdited) {
+    <span style="width: 12px;"></span>
+    }
+</ng-template>

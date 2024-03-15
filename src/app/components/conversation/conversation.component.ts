@@ -11,15 +11,13 @@ export class ConversationComponent {
 
   @ContentChild(PromptPreviewComponent) preview!: PromptPreviewComponent;
   currentConversation: Signal<string[]>;
-  isLoading: WritableSignal<boolean>;
+  isLoading: Signal<boolean>;
   shouldAddTemplate = false;
   settingsVisible = false;
   collectionNameSettingVisible = false;
 
-  constructor(
-    private conversationsService: ConversationsService,
-  ) {
-    this.currentConversation = this.conversationsService.currentConversation;
+  constructor(private conversationsService: ConversationsService) {
+    this.currentConversation = this.conversationsService.currentMessages;
     this.isLoading = conversationsService.isLoading;
   }
 
@@ -33,7 +31,8 @@ export class ConversationComponent {
 
   onClickStartNewConversation() {
     const message = this.preview.computeMessage();
-    this.conversationsService.startNewChat(message);
+    const template = this.preview.code();
+    this.conversationsService.startNewChat(message, template);
     this.shouldAddTemplate = false;
     this.settingsVisible = false;
     this.collectionNameSettingVisible = false;
@@ -41,7 +40,8 @@ export class ConversationComponent {
 
   onClickSendNextMessage() {
     const message = this.preview.computeMessage();
-    this.conversationsService.addMessage(message);
+    const template = this.preview.code();
+    this.conversationsService.addMessage(message, template);
     this.shouldAddTemplate = false;
   }
 
@@ -50,7 +50,7 @@ export class ConversationComponent {
   }
 
   onClickUpdateCollection() {
-    
+
   }
 
 }
