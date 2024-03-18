@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PromptsService } from '../../../services/prompts.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { PromptsService } from '../../../services/prompts.service';
 export class TabsComponent {
 
   @Input() isLoading = true;
+  @Output() requestCopy = new EventEmitter();
+  @Output() requestDownload = new EventEmitter();
   selectedIndex = this.promptsService.selectedTabIndex;
   prompts = this.promptsService.prompts;
 

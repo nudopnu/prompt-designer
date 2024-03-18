@@ -3,7 +3,7 @@
     height: 100%;
 }
 
-aside {
+aside#snippets {
     flex: 1 0 300px;
     padding: 16px;
     border-right: 1px solid #333;
@@ -17,4 +17,19 @@ main {
     flex: 1 1 50%;
     display: flex;
     flex-direction: column;
+}
+
+section#editor {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+section#editor>ngx-monaco-editor {
+    margin-bottom: -5px;
+    flex: 1 0;
+}
+
+section#conversation {
+    border-top: 1px solid #333;
 }

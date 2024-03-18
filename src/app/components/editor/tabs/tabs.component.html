@@ -5,7 +5,19 @@
         @if (isLoading) {
         <p style="padding-left: 14px;">Loading...</p>
         } @else {
-        <p style="padding-left: 14px;">prompt > {{ prompt.name }}</p>
+        <div style="display: flex; justify-content: space-between; padding: 0 14px;">
+            <p>prompt > {{ prompt.name }}</p>
+            <div>
+                <button nz-button [nz-tooltip]="'Copy ' + prompt.name + ' as single line'" nzType="link" nzSize="small"
+                    (click)="requestCopy.emit()">
+                    <span nz-icon nzType="copy"></span>
+                </button>
+                <button nz-button [nz-tooltip]="'Download ' + prompt.name + ' as file'" nzType="link" nzSize="small"
+                    (click)="requestDownload.emit()">
+                    <span nz-icon nzType="download"></span>
+                </button>
+            </div>
+        </div>
         }
     </nz-tab>
     <ng-template #title>

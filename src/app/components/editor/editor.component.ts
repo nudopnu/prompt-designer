@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild, computed, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { PromptsService } from '../../services/prompts.service';
 
 @Component({
@@ -17,6 +17,22 @@ export class EditorComponent {
   onInit() {
     this.isLoading = false;
     this.cdr.detectChanges();
+  }
+
+  onRequestCopy() {
+    const currentTemplate = this.promptsService.currentTemplateContent();
+    const clipboardContent = JSON.stringify(currentTemplate).slice(1, -1);
+    navigator.clipboard.writeText(clipboardContent);
+  }
+
+  onRequestDownload() {
+    const currentTemplate = this.promptsService.currentTemplateContent();
+    const blob = new Blob([currentTemplate], { type: 'plain/txt' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = this.promptsService.prompts()[this.promptsService.selectedTabIndex()].name;
+    link.click();
+    link.remove();
   }
 
 }

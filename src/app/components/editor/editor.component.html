@@ -1,11 +1,17 @@
-<aside>
+<aside id="snippets">
     <pro-snippets></pro-snippets>
 </aside>
 <main>
-    <pro-tabs [isLoading]="isLoading"></pro-tabs>
-    <ngx-monaco-editor style="height: 30%; margin-bottom: -5px; flex-shrink: 0;" [options]="editorOptions" [ngModel]="promptsService.currentTemplateContent()"
-        (ngModelChange)="promptsService.setCurrentTemplateContent($event)" (onInit)="onInit()"></ngx-monaco-editor>
-    <pro-conversation>
-        <pro-prompt-preview [code]="promptsService.currentTemplateContent()"> </pro-prompt-preview>
-    </pro-conversation>
+    <section id="editor">
+        <pro-tabs [isLoading]="isLoading" (requestCopy)="onRequestCopy()"
+            (requestDownload)="onRequestDownload()"></pro-tabs>
+        <ngx-monaco-editor [options]="editorOptions" [ngModel]="promptsService.currentTemplateContent()"
+            (ngModelChange)="promptsService.setCurrentTemplateContent($event)" (onInit)="onInit()">
+        </ngx-monaco-editor>
+    </section>
+    <section id="conversation">
+        <pro-conversation>
+            <pro-prompt-preview [code]="promptsService.currentTemplateContent()"> </pro-prompt-preview>
+        </pro-conversation>
+    </section>
 </main>
