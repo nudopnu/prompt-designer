@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +27,8 @@ import { ModelSettingsComponent } from './components/conversation/model-settings
 import { HidableComponent } from './components/utils/hidable/hidable.component';
 import { EditableLabelComponent } from './components/editable-label/editable-label.component';
 import { HoverableComponent } from './components/utils/hoverable/hoverable.component';
+import { ErrorHandlerService } from './services/error-handler.service';
+import { ErrorInterceptorService } from './services/error-interceptor.service';
 
 registerLocaleData(en);
 
@@ -61,7 +63,9 @@ registerLocaleData(en);
     HttpClientModule,
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: ErrorHandler, useClass: ErrorHandlerService },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

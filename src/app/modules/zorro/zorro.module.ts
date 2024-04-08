@@ -9,6 +9,7 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 const icons: IconDefinition[] = [
   CopyOutline,
@@ -35,6 +36,7 @@ const icons: IconDefinition[] = [
     NzTabsModule,
     NzSelectModule,
     NzSliderModule,
+    NzMessageModule,
   ]
 })
 export class ZorroModule { }
